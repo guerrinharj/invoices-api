@@ -12,6 +12,19 @@ filepath = "db/data.json"
 serialized_json = File.read(filepath)
 invoices = JSON.parse(serialized_json)
 
-invoices.each do |invoice|
-  puts invoice
+invoices.each do |inv|
+  invoice = Invoice.new
+  invoice.name = inv["clientName"]
+  invoice.email = inv["clientEmail"]
+  invoice.value = inv["total"]
+  invoice.code = inv["id"]
+  invoice.invoice_date = inv["createdAt"]
+  invoice.payment_date = inv["paymentDue"]
+  invoice.paid = inv["status"] == "paid"
+  invoice.client_address = inv["clientAddress"]
+  invoice.sender_address = inv["senderAddress"]
+  invoice.items = inv["items"].map { |item| item }
+  invoice.terms = inv["terms"]
+  invoice.save!
+  puts "#{invoice.code} created!"
 end
