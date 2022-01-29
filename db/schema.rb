@@ -17,13 +17,17 @@ ActiveRecord::Schema.define(version: 2022_01_29_020024) do
 
   create_table "invoices", force: :cascade do |t|
     t.string "name"
-    t.integer "value"
+    t.string "email"
+    t.float "value"
     t.string "code"
     t.boolean "paid", default: false
     t.string "description"
-    t.string "address"
+    t.string "client_address"
+    t.string "sender_address"
     t.date "invoice_date"
     t.date "payment_date"
+    t.string "items", array: true
+    t.integer "terms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Invoice.destroy_all
+
+filepath = "db/data.json"
+serialized_json = File.read(filepath)
+invoices = JSON.parse(serialized_json)
+
+invoices.each do |invoice|
+  puts invoice
+end
