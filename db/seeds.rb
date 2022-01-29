@@ -24,7 +24,8 @@ invoices.each do |inv|
   invoice.client_address = inv["clientAddress"]
   invoice.sender_address = inv["senderAddress"]
   invoice.items = inv["items"].map { |item| item }
-  invoice.terms = inv["terms"]
+  invoice.description = inv["description"]
+  invoice.terms = inv["paymentTerms"]
   invoice.save!
   puts "#{invoice.code} created!"
 end
