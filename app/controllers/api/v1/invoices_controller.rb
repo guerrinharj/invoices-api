@@ -25,6 +25,11 @@ class Api::V1::InvoicesController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    @invoice.destroy
+    head :no_content
+  end
+
   private
 
   def invoice_params
