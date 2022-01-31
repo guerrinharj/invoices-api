@@ -11,7 +11,7 @@ class Api::V1::InvoicesController < Api::V1::BaseController
 
   private
 
-  def set_restaurant
+  def set_invoice
     @invoice = Invoice.find(params[:id])
   end
 end
