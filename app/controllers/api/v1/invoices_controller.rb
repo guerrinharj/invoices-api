@@ -1,5 +1,5 @@
 class Api::V1::InvoicesController < Api::V1::BaseController
-  before_action :set_invoice, only: [ :show ]
+  before_action :set_invoice, only: [ :show, :update ]
 
   def index
     @invoices = Invoice.all
@@ -11,6 +11,15 @@ class Api::V1::InvoicesController < Api::V1::BaseController
   def update
     if @invoice.update(invoice_params)
       render :show
+    else
+      render_error
+    end
+  end
+
+  def create
+    @invoice = Invoice.new(invoice_params)
+    if @invoice.save
+      render :show, status: :created
     else
       render_error
     end
