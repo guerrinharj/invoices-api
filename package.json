@@ -1,6 +1,8 @@
 {
   "name": "invoices_api",
   "private": true,
+  "engines": { "node": "v14.15.5"
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
     "@rails/actioncable": "^6.0.0",
