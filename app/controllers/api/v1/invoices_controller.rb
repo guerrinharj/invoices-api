@@ -3,6 +3,7 @@ class Api::V1::InvoicesController < Api::V1::BaseController
 
   def index
     @invoices = Invoice.all
+    @paid_invoices = @invoices.filter_by_paid
   end
 
   def show
