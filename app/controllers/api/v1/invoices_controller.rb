@@ -2,8 +2,15 @@ class Api::V1::InvoicesController < Api::V1::BaseController
   before_action :set_invoice, only: [ :show, :update ]
 
   def index
-    @invoices = Invoice.all
-    @paid_invoices = @invoices.filter_by_paid
+    if params[:paid] == "true"
+      @invoices = Invoice.where(paid: true)
+    elsif params[:paid] == "false"
+      @invoices = Invoice.where(paid: false)
+    elsif params[:paid.nil?]
+      @invoices = Invoice.where(paid: nil)
+    else
+      @invoices = Invoice.all
+    end
   end
 
   def show
