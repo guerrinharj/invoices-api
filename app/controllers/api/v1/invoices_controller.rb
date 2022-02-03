@@ -6,8 +6,6 @@ class Api::V1::InvoicesController < Api::V1::BaseController
       @invoices = Invoice.where(paid: true)
     elsif params[:paid] == "false"
       @invoices = Invoice.where(paid: false)
-    elsif params[:paid].nil?
-      @invoices = Invoice.where(paid: nil)
     else
       @invoices = Invoice.all
     end
