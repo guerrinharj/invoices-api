@@ -21,9 +21,26 @@ invoices.each do |inv|
   invoice.invoice_date = inv["createdAt"]
   invoice.payment_date = inv["paymentDue"]
   invoice.paid = inv["status"] == "paid"
-  invoice.client_address = inv["clientAddress"]
-  invoice.sender_address = inv["senderAddress"]
-  invoice.items = inv["items"].map { |item| item }
+  invoice.client_address = {
+    street: inv["clientAddress"]["street"],
+    city: inv["clientAddress"]["city"],
+    postCode: inv["clientAddress"]["postCode"],
+    country: inv["clientAddress"]["country"]
+  }
+    invoice.sender_address = {
+    street: inv["senderAddress"]["street"],
+    city: inv["senderAddress"]["city"],
+    postCode: inv["senderAddress"]["postCode"],
+    country: inv["senderAddress"]["country"]
+  }
+  invoice.items = inv["items"].map do |item|
+    item = {
+      name: item["name"],
+      quantity: item["quantity"],
+      price: item["price"],
+      total: item["total"]
+    }
+  end
   invoice.description = inv["description"]
   invoice.terms = inv["paymentTerms"]
   invoice.save!
