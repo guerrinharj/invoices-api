@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2022_01_29_020024) do
     t.string "sender_address"
     t.date "invoice_date"
     t.date "payment_date"
-    t.string "items", array: true
+    t.text "items", default: [], array: true
     t.integer "terms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

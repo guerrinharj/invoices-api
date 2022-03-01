@@ -11,7 +11,7 @@ class CreateInvoices < ActiveRecord::Migration[6.0]
       t.string :sender_address
       t.date :invoice_date
       t.date :payment_date
-      t.string :items, array: true
+      t.text :items, array: true, default: []
       t.integer :terms
       t.timestamps
     end
