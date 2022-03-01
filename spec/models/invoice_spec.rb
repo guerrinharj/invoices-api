@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
-  before { described_class.create!(email: 'john@home.xyz') }
-  it 'is invalid if the email is not unique' do
-  expect(subject).to be_invalid
+  it "should have an user" do
+    expect(subject).not_to be_nil
   end
 end
