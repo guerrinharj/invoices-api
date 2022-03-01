@@ -33,7 +33,14 @@ invoices.each do |inv|
     postCode: inv["senderAddress"]["postCode"],
     country: inv["senderAddress"]["country"]
   }
-  invoice.items = inv["items"].map  {|item| item }
+  invoice.items = inv["items"].each do |item|
+    hash_item = {
+      name: item["name"],
+      quantity: item["quantity"],
+      price: item["price"],
+      total: item["total"]
+    }
+  end
   invoice.description = inv["description"]
   invoice.terms = inv["paymentTerms"]
   invoice.save!
