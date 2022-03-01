@@ -11,21 +11,22 @@ require 'faker'
 User.destroy_all
 Invoice.destroy_all
 
-10.times do
-  user = User.new
-  user.username = "#{Faker::Name.unique.name}"
-  user.email = "#{Faker::Name.unique.initials.downcase}@email.com"
-  user.password = "password123"
-  user.encrypted_password = "password123"
-  user.bio = Faker::Quotes::Chiquito.expression
-  user.save!
-end
-
 filepath = "db/data.json"
 serialized_json = File.read(filepath)
 invoices = JSON.parse(serialized_json)
 
 invoices.each do |inv|
+
+
+  user = User.new
+  user.username = inv["clientName"].downcase.gsub(/\s+/, "_")
+  user.email = inv["clientEmail"]
+  user.password = "password123"
+  user.encrypted_password = "password123"
+  user.bio = Faker::Quotes::Chiquito.expression
+  user.save!
+
+
   invoice = Invoice.new
   invoice.name = inv["clientName"]
   invoice.email = inv["clientEmail"]
@@ -58,5 +59,5 @@ invoices.each do |inv|
   invoice.terms = inv["paymentTerms"]
   invoice.user = User.order('RANDOM()').first
   invoice.save!
-  puts "#{invoice.code} created!"
+  puts "#{invoice.code} created for #{user.username}!"
 end
