@@ -16,18 +16,18 @@ class Api::V1::InvoicesController < Api::V1::BaseController
 
   def update
     if @invoice.update(invoice_params)
-      render :show
+      render json: @invoice
     else
-      render_error
+      render json: @invoice.errors, status: :unprocessable_entity
     end
   end
 
   def create
     @invoice = Invoice.new(invoice_params)
     if @invoice.save
-      render :show, status: :created
+      render json: @invoice
     else
-      render_error
+      render json: @invoice.errors, status: :unprocessable_entity
     end
   end
 
