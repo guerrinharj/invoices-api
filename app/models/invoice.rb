@@ -3,7 +3,7 @@ require 'faker'
 class Invoice < ApplicationRecord
   belongs_to :user
   after_initialize :random_user
-  after_initiliaze :generate_code
+  after_initialize :generate_code
 
   serialize :client_address
   serialize :sender_address
